@@ -1,0 +1,21 @@
+{
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/AndroidResources": true,
+        "**/LaunchScreen.storyboardc": true,
+        "**/.vscode": true,
+        "**/Images.xcassets": true,
+        "**/templatesOld": true
+    },
+    "explorerExclude.backup": null,
+	
+	"workbench.colorCustomizations": {
+        "[Monokai Dimmed]": {
+            "editor.lineHighlightBackground": "#2e1e1e"
+        }
+	}
+}
