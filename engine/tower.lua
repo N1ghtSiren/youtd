@@ -28,7 +28,7 @@ end
 function methods.attack(self)
     if(self.target and self.cooldown>=self.cooldownmax)then
         
-        self.tempdamage = self.damage
+        self.tempdamage = self.damage * (self.damage_increased_percent*0.01)
         --crits goes there
 
         for _, func in pairs(self.actions_onattack)do
@@ -69,6 +69,23 @@ function methods.update(self)
     self:attack()
 end
 
+function methods.addItem(self, item, slot)
+    item.onequip(self)
+    self.items[slot] = item
+end
+
+function methods.removeItem(self, item, slot)
+    item.onloose(self)
+    self.items[slot] = nil
+end
+
+function methods.default_lvlup(self)
+    self.damage_increased_percent = self.damage_increased_percent + 4
+end
+
+function methods.default_lvldown(self)
+    self.damage_increased_percent = self.damage_increased_percent - 4
+end
 
 function methods.onlvlup(self)
     for _, func in pairs(self.actions_onlvlup)do
@@ -80,6 +97,11 @@ function methods.onlvldown(self)
     for _, func in pairs(self.actions_onlvldown)do
         func(self)
     end
+end
+
+function methods.defaults_add(self)
+    table.insert(self.actions_onlvlup, methods.default_lvlup)
+    table.insert(self.actions_onlvldown, methods.default_lvldown)
 end
 
 function methods.addxp(self, amount)
@@ -140,15 +162,22 @@ function tower.new(id, gridx, gridy)
 
         mainattack = tower.mainattack or false,
         tempdamage = 0,
+        items = {},
 
         --unnecessary stats
         projectilespeed = tower.projectilespeed or 666,
+        maxitems = tower.maxitems or 1,
 
         --base stats
-
         damage = tower.damage,
         range = tower.range,
         cooldownmax = tower.cooldownmax,
+        goldcost = tower.goldcost or 0,
+
+        --alt stats
+        damage_increased_value = 100,
+        damage_increased_percent = 100,
+        damage_more_percent = 100,
 
         --tables
         actions_special = tower.actions_special or {},
@@ -165,4 +194,9 @@ function tower.new(id, gridx, gridy)
     setAnchor(obj.model, 0.5, 0.5)
     obj.model.x = obj.x
     obj.model.y = obj.y
+    obj.model.id = obj
+
+    interface.thistower.registertap(obj.model)
+
+    obj:defaults_add()
 end

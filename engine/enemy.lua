@@ -13,8 +13,8 @@ function methods.remove(self)
     indexer.remove("e", self)
 
     if(indexer.size("e")==0 and wave.enemiesLeft()==0)then
-        wave.finish()
-        wave.start()
+        wave.finish(true)
+        --wave.start()
     end
 end
 

@@ -31,6 +31,6 @@ obj.wpy[2] = 150
 obj.wpx[3] = obj.exitx
 obj.wpy[3] = obj.exity
 
-obj.maxwaves = 8
+obj.maxwaves = 50
 
 return obj

@@ -24,5 +24,6 @@ require("engine.gamelog")
 
 require("content.enemydb")
 require("content.towerdb")
+require("content.itemdb")
 --preload end
 composer.gotoScene("scenes.mainmenu")

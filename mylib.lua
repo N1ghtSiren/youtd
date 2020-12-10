@@ -80,6 +80,17 @@ end
 function round(n)
     return math.floor(n+0.5)
 end
+
+function textCutter(str, amount)
+    local newStringSymbol = "\n"
+    local temp = ""
+
+    for i = 1, 1+string.len(str)/amount do
+        temp = temp..string.sub(str, 1, amount)..newStringSymbol
+        str = string.sub(str, amount+1)
+    end
+    return temp
+end
 --[[
 group[0] = display.newGroup()  --    invisibleBG
 group[1] = display.newGroup()  --    field

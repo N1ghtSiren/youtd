@@ -20,12 +20,13 @@ end
 
 local obj = {
     name = "testtower",
-    image = "img/towers/t00.png",
+    image = "img/towers/testtower.png",
 
     range = 1000,
     damage = 200,
     cooldownmax = 5000,
-    
+    goldcost = 0,
+
     projectilespeed = 1000,
 
     mainattack = mainattack,

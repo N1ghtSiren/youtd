@@ -63,7 +63,7 @@ function level.start(id)
 
     wave.startLevel()
 
-    tower.new("testtower", 3, 3)
+    tower.new("t01", 3, 3)
     composer.gotoScene("scenes.level")
 end
 

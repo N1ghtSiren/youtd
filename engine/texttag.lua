@@ -12,6 +12,7 @@ end
 function texttag.new(text, x, y, lifetime)
     local texttag = create(text, x, y, 30)
     texttag:setFillColor(1, 1, 1, 1)
+
     local Timer = nil
     
     lifetime = lifetime * 60

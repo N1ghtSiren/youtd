@@ -16,7 +16,7 @@ function wave.generateAll(level)
         local playerdamage = 0
         local name = enemydb.getRandom()
 
-        local lifeValue = 100+(i*10)
+        local lifeValue = round((300+i)*(1+i*0.1)*math.pow(3, i/30)) --100*(1+i*0.1)*math.pow(3, i/30)
         local bountyValue = 20+(i*2)
         local experienceValue = 20+(i*0.5)
         
@@ -75,10 +75,16 @@ function wave.start()
     currentWave = currentWave + 1
 
     if(currentWave<=#allWaves)then
-        interface.waveList.remove(currentWave-1)
-        gamelog.add("wave: "..currentWave.." enemies: "..allWaves[currentWave].mobs.." "..allWaves[currentWave].type.." life: "..allWaves[currentWave].life)
         wavetimer = timer.performWithDelay(750, wave.spawn, -1)
+        gamelog.add("wave: "..currentWave.." enemies: "..allWaves[currentWave].mobs.." "..allWaves[currentWave].type.." life: "..allWaves[currentWave].life)
+        
+
+        interface.waveList.remove(currentWave-1)
         interface.setWave(currentWave)
+        --
+        for j = 0, 5 do
+            interface.items.add("testitem")
+        end
     else
         gamelog.add("level completed")
     end
@@ -92,10 +98,14 @@ function wave.resume()
     timer.resume(wavetimer)
 end
 
-function wave.finish()
+function wave.finish(flag)
     if(wavetimer)then
         timer.cancel(wavetimer)
         wavetimer = nil
+    end
+    
+    if(flag)then
+        wave.start()
     end
 end
 

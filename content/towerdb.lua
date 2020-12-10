@@ -4,6 +4,8 @@ local towers = {}
 
 local towernames = {
     "testtower",
+    "t00",
+    "t01",
 }
 
 function towerdb.loadAll()
